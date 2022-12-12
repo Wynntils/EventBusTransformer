@@ -11,6 +11,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import net.minecraftforge.eventbus.EventBusEngine;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +28,8 @@ public class Main {
         ZipFile zip = new ZipFile(file);
         File transformed = new File(args.length > 1 ? args[1] : "transformed.jar");
         ZipOutputStream output = new ZipOutputStream(new FileOutputStream(transformed));
-        IEventBusEngine engine = ServiceLoader.load(IEventBusEngine.class).findFirst().orElseThrow();
+        //IEventBusEngine engine = ServiceLoader.load(IEventBusEngine.class).findFirst().orElseThrow();
+        IEventBusEngine engine = new EventBusEngine();
 
         Enumeration<? extends ZipEntry> entries = zip.entries();
         while (entries.hasMoreElements()) {

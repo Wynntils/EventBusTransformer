@@ -3,6 +3,7 @@ package com.wynntils.eventbustransformer;
 import java.io.Serial;
 import java.util.ServiceLoader;
 
+import net.minecraftforge.eventbus.EventBusEngine;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Type;
@@ -17,7 +18,8 @@ public class EventBusTransform implements ClassEditTransformer {
 
     @Override
     public dev.architectury.transformer.shadowed.impl.org.objectweb.asm.tree.ClassNode doEdit(String name, dev.architectury.transformer.shadowed.impl.org.objectweb.asm.tree.ClassNode node) {
-        IEventBusEngine engine = ServiceLoader.load(IEventBusEngine.class).findFirst().orElseThrow();
+        //IEventBusEngine engine = ServiceLoader.load(IEventBusEngine.class).findFirst().orElseThrow();
+        IEventBusEngine engine = new EventBusEngine();
 
         Type type = Type.getObjectType(node.name);
         String className = type.getClassName();
